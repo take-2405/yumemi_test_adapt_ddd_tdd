@@ -1,5 +1,5 @@
-package infrastructure
+package domain
 
-type RankingData struct{
-	
+type LogData struct{
+
 }
