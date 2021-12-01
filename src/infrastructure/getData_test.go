@@ -1,7 +1,6 @@
 package infrastructure
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -18,11 +17,11 @@ func TestReadLogData(t *testing.T) {
 			args: "./../../game_score_log.csv",
 			wantErr: nil,
 		},
-		{
-			name:"FailCheckReadLogFile",
-			args: "./../../game_score_log.csv",
-			wantErr: errors.New(""),
-		},
+		//{
+		//	name:"FailCheckReadLogFile",
+		//	args: "./../../game_score_log.csv",
+		//	wantErr: errors.New(""),
+		//},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -37,6 +36,7 @@ func TestReadLogData(t *testing.T) {
 
 func Test_checkLogHeader(t *testing.T) {
 	record,_:=ReadLogData("./../../game_score_log.csv")
+	header, _ := record.Read()
 	type args struct {
 		header []string
 	}
@@ -48,14 +48,14 @@ func Test_checkLogHeader(t *testing.T) {
 		// TODO: Add test cases.
 		{
 			name:"checkLogFileHeader",
-			args: args{header: record[0]},
+			args: args{header: header},
 			want: true,
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := checkLogHeader(tt.args.header); got != tt.want {
+			if got := CheckLogHeader(tt.args.header); got != tt.want {
 				t.Errorf("checkLogHeader is error = %v",got)
 			}
 		})
