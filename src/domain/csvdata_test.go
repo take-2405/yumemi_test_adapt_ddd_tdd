@@ -33,3 +33,37 @@ func TestParseLogData(t *testing.T) {
 		})
 	}
 }
+
+func TestRankingDatas_CalcAgerageScore(t *testing.T) {
+	var rankingData RankingDatas
+	record,_:=infrastructure.ReadLogData("./../../game_score_log.csv")
+	record.Read()
+	playData:=ParseLogData(record)
+
+	type fields struct {
+		Datas map[int]string
+	}
+	type args struct {
+		data *PlayDatas
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		args   args
+	}{
+		// TODO: Add test cases.
+		{
+			name: "SuccessCalcAgerageScore",
+			fields: fields{rankingData.Datas},
+			args: args{playData},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			r := &RankingDatas{
+				Datas: tt.fields.Datas,
+			}
+			r.CalcAgerageScore(tt.args.data)
+		})
+	}
+}
