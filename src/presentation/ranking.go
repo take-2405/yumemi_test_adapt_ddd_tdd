@@ -1,6 +1,8 @@
 package presentation
 
 import (
+	"fmt"
+	"strconv"
 	"yumemi-coding-test-practice/src/domain"
 )
 
@@ -34,5 +36,12 @@ func (r *RankingDatas) TransferPlayDataToRanking(topScores []int, playerScores d
 			break
 		}
 		beforeScore = topScores[i]
+	}
+}
+
+func (r *RankingDatas) PrintResult() {
+	fmt.Println("rank,player_id,mean_score")
+	for _, data := range r.datas {
+		fmt.Println(strconv.Itoa(data.Rank) + "," + data.Player + strconv.Itoa(data.Score))
 	}
 }

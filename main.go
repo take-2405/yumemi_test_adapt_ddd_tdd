@@ -32,4 +32,5 @@ func main() {
 
 	var ranking presentation.RankingDatas
 	ranking.TransferPlayDataToRanking(*topScores, playerScores)
+	ranking.PrintResult()
 }
