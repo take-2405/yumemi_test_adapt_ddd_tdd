@@ -4,10 +4,10 @@ import (
 	"log"
 	"yumemi-coding-test-practice/src/domain"
 	"yumemi-coding-test-practice/src/infrastructure"
+	"yumemi-coding-test-practice/src/presentation"
 )
 
 func main() {
-	var rankingData domain.RankingDatas
 	csv, err := infrastructure.ReadLogData("./game_score_log.csv")
 	if err != nil {
 		log.Fatal(err)
@@ -21,8 +21,15 @@ func main() {
 			log.Fatal(err)
 		}
 	}
-	data := domain.ParseLogData(csv)
-	rankingData.CalcAgerageScore(data)
-	//scores := rankingData.SortRankingScore()
-	//rankingData.PrintResults(scores)
+	playDatas, err := infrastructure.ParseLogData(csv)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var playerScores domain.PlayerScores
+	playerScores.CalcAgerageScore(playDatas)
+	topScores := playerScores.SortRankingScore()
+
+	var ranking presentation.RankingDatas
+	ranking.TransferPlayDataToRanking(*topScores, playerScores)
 }
