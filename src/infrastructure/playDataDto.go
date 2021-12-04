@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"encoding/csv"
 	"strconv"
+	"yumemi-coding-test-practice/src/domain"
 )
 
 type playData struct {
@@ -35,4 +36,16 @@ func ParseLogData(csv *csv.Reader) (*PlayDatas, error) {
 		}
 	}
 	return &playDatas, nil
+}
+
+func (p *PlayDatas) CalcAgerageScore() *domain.PlayerScores {
+	var playScore domain.PlayerScores
+	playScore.PlayerScore = make(map[string]int, 500)
+
+	for playerId, playData := range p.Datas {
+		score := playData.Score / playData.Count
+		playScore.PlayerScore[playerId] = score
+	}
+
+	return &playScore
 }
