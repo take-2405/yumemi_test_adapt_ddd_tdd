@@ -49,9 +49,9 @@ https://www.yumemi.co.jp/serverside_recruit
 
 ## 実行方法
 ```cassandraql
-go run main.go test.csv
+go run cmd/main.go game_score_log.csv
 ```
-test.csv=使用するcsvファイル
+game_score_log.csv=使用するcsvファイル
 
 ## 今後の課題
 - 他の方の回答と比較 
