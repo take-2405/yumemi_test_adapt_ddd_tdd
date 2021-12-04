@@ -57,6 +57,7 @@ game_score_log.csv=使用するcsvファイル
 - 他の方の回答と比較 
 - パフォーマンス改善  
 - DDDを初めて採用したため、責務分けがきちんとできているかを確認  
+- ドメインモデル図などを作成したい(変数名を統一したい)
 
 [比較対象](https://zenn.dev/foxtail88/scraps/17e94c540e0771)  
 [自己確認はこの本を読むことで行う](https://www.amazon.co.jp/dp/B082WXZVPC/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)  
