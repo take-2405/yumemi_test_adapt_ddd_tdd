@@ -13,6 +13,7 @@ func NewRankingDataPersistence() repository.RankingDataRepository {
 	return &rankingDataPersistence{}
 }
 
+//プレイヤーごとの平均得点を算出
 func (r rankingDataPersistence) CalcPlayerAverageScore(datas domain.PlayDatas) *domain.PlayerScores {
 	var PlayerScore domain.PlayerScores
 	PlayerScore.PlayerScore = make(map[string]int, 500)
@@ -23,6 +24,7 @@ func (r rankingDataPersistence) CalcPlayerAverageScore(datas domain.PlayDatas) *
 	return &PlayerScore
 }
 
+//プレイヤーの得点を照準で算出
 func (r rankingDataPersistence) GetAscendingOrderScore(playerScore *domain.PlayerScores) *[]int {
 	keys := make([]int, len(playerScore.PlayerScore), len(playerScore.PlayerScore))
 	i := 0

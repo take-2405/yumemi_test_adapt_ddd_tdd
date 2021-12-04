@@ -18,6 +18,7 @@ func NewPlayDataPersistence() repository.PlayDataRepository {
 	return &playDataPersistence{}
 }
 
+//CSVデータを読み込み
 func (p playDataPersistence) ReadPlayData(filePath string) (*csv.Reader, error) {
 	//渡されたファイルパスのファイルを開く
 	file, err := os.Open(filePath)
@@ -41,6 +42,7 @@ func (p playDataPersistence) ReadPlayData(filePath string) (*csv.Reader, error) 
 	return csv, nil
 }
 
+//　読み込んだCSVファイルのヘッダーを確認
 func checkLogHeader(header []string) bool {
 	//ヘッダーを確認
 	if header[0] != "create_timestamp" || header[1] != "player_id" || header[2] != "score" {
@@ -49,6 +51,7 @@ func checkLogHeader(header []string) bool {
 	return true
 }
 
+//読み込んだCSVデータを連想配列にパース
 func (p playDataPersistence) ParsePlayData(csv *csv.Reader) (domain.PlayDatas, error) {
 	//問題文では10000人以下と書いているため、10000がいいと思うが今回は500
 	p.PlayData.Data = make(map[string]domain.PlayData, 500)
