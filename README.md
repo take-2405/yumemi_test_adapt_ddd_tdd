@@ -7,14 +7,27 @@
 
 ### アーキテクチャ
 - オニオンアーキテクチャ
-  - presentation  
-    入出力管理(リクエスト、レスポンス)
-  - domain  
-    ドメイン知識(今回はランキング用モデル)
-  - infrastructure  
-    DBなどのインタフェースなど(今回はCSV)
-  - application  
-    ビジネスロジック
+```
+.
+├── application
+│   └── rankingData.go
+├── domain
+│   ├── playData.go
+│   ├── rankingData.go
+│   └── repository
+│       ├── playData_repository.go
+│       └── rankingData_repository.go
+├── infrastructure
+│   ├── playData.go
+│   └── rankingData.go
+└── presentation
+    ├── hander
+    │   └── ranking.go
+    └── response
+        └── ranking.go
+
+```
+
 ##### 依存関係  
 ```
 presentation  
@@ -25,8 +38,6 @@ domain
 ```
 ```
 infrastructure
-↓  
-application  
 ↓  
 domain 
 ```
