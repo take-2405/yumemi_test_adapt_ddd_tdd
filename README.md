@@ -1,12 +1,37 @@
 # yumemi-coding-test-practice
 ゆめみさんのコーディングテストを解いてみる
 
-### このリポジトリの説明  
+### リポジトリの説明  
 ゆめみさんのコーディンテストを解きつつ，最近学んだTDDとDDDを意識して取り組む  
 なお、今回はドメインがはっきりしていないため、アーキテクチャを意識するという意味でDDDに取り組む
 
 ### アーキテクチャ
 - オニオンアーキテクチャ
+  - presentation  
+    入出力管理(リクエスト、レスポンス)
+  - domain  
+    ドメイン知識(今回はランキング用モデル)
+  - infrastructure  
+    DBなどのインタフェースなど(今回はCSV)
+  - application  
+    ビジネスロジック
+##### 依存関係  
+```
+presentation  
+↓  
+application  
+↓  
+domain 
+```
+```
+infrastructure
+↓  
+application  
+↓  
+domain 
+```
+
+
 
 ### 取り組んだ問題
 https://www.yumemi.co.jp/serverside_recruit
