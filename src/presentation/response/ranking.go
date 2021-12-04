@@ -1,4 +1,4 @@
-package presentation
+package response
 
 import (
 	"fmt"
@@ -13,10 +13,11 @@ type RankingData struct {
 }
 
 type RankingDatas struct {
-	datas []RankingData
+	Datas []RankingData
 }
 
-func (r *RankingDatas) TransferPlayDataToRanking(topScores []int, playerScores domain.PlayerScores) {
+func TransferPlayDataToRanking(topScores []int, playerScores domain.PlayerScores) RankingDatas {
+	var rankingDatas RankingDatas
 	var rankingData RankingData
 	rank := 1
 	beforeScore := 0
@@ -27,7 +28,7 @@ func (r *RankingDatas) TransferPlayDataToRanking(topScores []int, playerScores d
 					rankingData.Rank = rank
 					rankingData.Player = playerId
 					rankingData.Score = topScores[i]
-					r.datas = append(r.datas, rankingData)
+					rankingDatas.Datas = append(rankingDatas.Datas, rankingData)
 				}
 			}
 			rank++
@@ -37,11 +38,12 @@ func (r *RankingDatas) TransferPlayDataToRanking(topScores []int, playerScores d
 		}
 		beforeScore = topScores[i]
 	}
+	return rankingDatas
 }
 
-func (r *RankingDatas) PrintResult() {
+func PrintResult(datas RankingDatas) {
 	fmt.Println("rank,player_id,mean_score")
-	for _, data := range r.datas {
+	for _, data := range datas.Datas {
 		fmt.Println(strconv.Itoa(data.Rank) + "," + data.Player + strconv.Itoa(data.Score))
 	}
 }

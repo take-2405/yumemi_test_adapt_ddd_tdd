@@ -1,13 +1,10 @@
 package domain
 
-type PlayerScores struct {
-	PlayerScore map[string]int
+type PlayData struct {
+	Count int `csv:"player_id"`
+	Score int `csv:"score"`
 }
 
-//func (p *PlayerScores) CalcAgerageScore(playDatas *infrastructure.PlayDatas) {
-//	p.PlayerScore = make(map[string]int, 500)
-//	for playerId, playData := range playDatas.Datas {
-//		score := playData.Score / playData.Count
-//		p.PlayerScore[playerId] = score
-//	}
-//}
+type PlayDatas struct {
+	Data map[string]PlayData
+}
