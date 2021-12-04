@@ -2,6 +2,7 @@ package hander
 
 import (
 	"errors"
+	"flag"
 	"log"
 	"os"
 	"yumemi-coding-test-practice/src/application"
@@ -23,11 +24,8 @@ func NewRankingHandler(ru application.RankingUseCase) RankingHandler {
 }
 
 func (rh rankingHandler) HandlePrintRanking() {
-
-	filePath, err := parseArgment()
-	if err != nil {
-		log.Fatal(err)
-	}
+	flag.Parse()
+	filePath := flag.Arg(0)
 
 	playData, ascendingScore, err := rh.rankingUseCase.PrintScoreRanking(filePath)
 	if err != nil {
