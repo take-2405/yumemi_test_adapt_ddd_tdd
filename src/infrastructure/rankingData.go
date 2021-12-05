@@ -1,6 +1,7 @@
 package infrastructure
 
 import (
+	"math"
 	"sort"
 	"yumemi-coding-test-practice/src/domain"
 	"yumemi-coding-test-practice/src/domain/repository"
@@ -18,7 +19,7 @@ func (r rankingDataPersistence) CalcPlayerAverageScore(datas domain.PlayDatas) *
 	var PlayerScore domain.PlayerScores
 	PlayerScore.PlayerScore = make(map[string]int, 500)
 	for playerId, playData := range datas.Data {
-		score := playData.Score / playData.Count
+		score := int(math.Round(float64(playData.Score) / float64(playData.Count)))
 		PlayerScore.PlayerScore[playerId] = score
 	}
 	return &PlayerScore
