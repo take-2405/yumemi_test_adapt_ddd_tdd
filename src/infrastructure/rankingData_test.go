@@ -12,21 +12,7 @@ var playDatas domain.PlayDatas
 
 func Test_rankingDataPersistence_CalcPlayerAverageScore(t *testing.T) {
 	var playDatas domain.PlayDatas
-
-	playData := NewPlayDataPersistence()
-	playDatarepo := repository.PlayDataRepository(playData)
-	csv, err := playDatarepo.ReadPlayData("./../../game_score_log.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	_, err = csv.Read()
-	if err != nil {
-		log.Fatal(err)
-	}
-	playDatas, err = playDatarepo.ParsePlayData(csv)
-	if err != nil {
-		log.Fatal(err)
-	}
+	playDatas = map[string]int{"foo": 100, "bar": 200, "baz": 300}
 	type args struct {
 		datas domain.PlayDatas
 	}
