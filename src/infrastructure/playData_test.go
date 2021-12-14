@@ -3,7 +3,6 @@ package infrastructure
 import (
 	"encoding/csv"
 	"log"
-	"os"
 	"testing"
 	"yumemi-coding-test-practice/src/domain"
 	"yumemi-coding-test-practice/src/domain/repository"
@@ -11,21 +10,8 @@ import (
 
 func Test_checkLogHeader(t *testing.T) {
 	//渡されたファイルパスのファイルを開く
-	file, err := os.Open("./../../game_score_log.csv")
-	//defer file.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
-	//csv fileの中身を全部取得
-	csv := csv.NewReader(file)
-	if err != nil {
-		log.Fatal(err)
-	}
-	header, err := csv.Read()
-	if err != nil {
-		log.Fatal(err)
-	}
-	log.Println(header)
+	var successHeader []string = []string{"create_timestamp", "player_id", "score"}
+	var faildHeader []string = []string{"a", "b", "c"}
 	type args struct {
 		header []string
 	}
@@ -36,8 +22,13 @@ func Test_checkLogHeader(t *testing.T) {
 	}{
 		{
 			name: "successCheckHeader",
-			args: args{header: header},
+			args: args{header: successHeader},
 			want: true,
+		},
+		{
+			name: "successCheckHeader",
+			args: args{header: faildHeader},
+			want: false,
 		},
 	}
 	for _, tt := range tests {

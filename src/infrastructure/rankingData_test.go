@@ -1,32 +1,19 @@
 package infrastructure
 
 import (
-	"log"
 	"reflect"
 	"testing"
 	"yumemi-coding-test-practice/src/domain"
-	"yumemi-coding-test-practice/src/domain/repository"
 )
 
 var playDatas domain.PlayDatas
 
 func Test_rankingDataPersistence_CalcPlayerAverageScore(t *testing.T) {
 	var playDatas domain.PlayDatas
+	playDatas.Data = make(map[string]domain.PlayData)
+	playDatas.Data["a"] = domain.PlayData{2, 110}
+	playDatas.Data["b"] = domain.PlayData{3, 130}
 
-	playData := NewPlayDataPersistence()
-	playDatarepo := repository.PlayDataRepository(playData)
-	csv, err := playDatarepo.ReadPlayData("./../../game_score_log.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	_, err = csv.Read()
-	if err != nil {
-		log.Fatal(err)
-	}
-	playDatas, err = playDatarepo.ParsePlayData(csv)
-	if err != nil {
-		log.Fatal(err)
-	}
 	type args struct {
 		datas domain.PlayDatas
 	}
@@ -52,24 +39,11 @@ func Test_rankingDataPersistence_CalcPlayerAverageScore(t *testing.T) {
 }
 
 func Test_rankingDataPersistence_GetAscendingOrderScore(t *testing.T) {
-	var playDatas domain.PlayDatas
+	var playDatas domain.PlayerScores
+	playDatas.PlayerScore = make(map[string]int)
+	playDatas.PlayerScore["a"] = 100
+	playDatas.PlayerScore["b"] = 200
 
-	playData := NewPlayDataPersistence()
-	playDatarepo := repository.PlayDataRepository(playData)
-	csv, err := playDatarepo.ReadPlayData("./../../game_score_log.csv")
-	if err != nil {
-		log.Fatal(err)
-	}
-	_, err = csv.Read()
-	if err != nil {
-		log.Fatal(err)
-	}
-	playDatas, err = playDatarepo.ParsePlayData(csv)
-	if err != nil {
-		log.Fatal(err)
-	}
-	r := rankingDataPersistence{}
-	playerScore := r.CalcPlayerAverageScore(playDatas)
 	type args struct {
 		playerScore *domain.PlayerScores
 	}
@@ -80,7 +54,7 @@ func Test_rankingDataPersistence_GetAscendingOrderScore(t *testing.T) {
 	}{
 		{
 			name: "successGetAscendingOrderScore",
-			args: args{playerScore: playerScore},
+			args: args{playerScore: &playDatas},
 			want: nil,
 		},
 	}
