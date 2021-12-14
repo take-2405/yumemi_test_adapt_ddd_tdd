@@ -56,20 +56,20 @@ func Test_playDataPersistence_ParsePlayData(t *testing.T) {
 	type fields struct {
 		PlayData domain.PlayDatas
 	}
-	type args struct {
-		csv *csv.Reader
-	}
+	//type args struct {
+	//	csv *csv.Reader
+	//}
 	tests := []struct {
-		name    string
-		fields  fields
-		args    args
+		name   string
+		fields fields
+		//args    args
 		want    domain.PlayDatas
 		wantErr error
 	}{
 		{
-			name:    "successParsePlayData",
-			fields:  fields{PlayData: PlayData},
-			args:    args{csv: csv},
+			name:   "successParsePlayData",
+			fields: fields{PlayData: PlayData},
+			//args:    args{csv: csv},
 			want:    PlayData,
 			wantErr: nil,
 		},
@@ -79,7 +79,7 @@ func Test_playDataPersistence_ParsePlayData(t *testing.T) {
 			p := playDataPersistence{
 				PlayData: tt.fields.PlayData,
 			}
-			got, err := p.ParsePlayData(tt.args.csv)
+			got, err := p.ParsePlayData(csv)
 			if (err != nil) && err != tt.wantErr {
 				t.Errorf("ParsePlayData() error = %v, wantErr %v", err, tt.wantErr)
 				return
